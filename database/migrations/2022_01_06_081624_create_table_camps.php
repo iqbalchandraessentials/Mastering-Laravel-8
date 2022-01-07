@@ -13,7 +13,7 @@ class CreateTableCamps extends Migration
      */
     public function up()
     {
-        Schema::create('table_camps', function (Blueprint $table) {
+        Schema::create('camps', function (Blueprint $table) {
             $table->id();
             $table->string('title',100);
             $table->string('slug',100);
@@ -30,6 +30,6 @@ class CreateTableCamps extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_camps');
+        Schema::dropIfExists('camps');
     }
 }
