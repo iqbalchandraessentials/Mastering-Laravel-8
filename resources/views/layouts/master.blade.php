@@ -16,6 +16,7 @@
 
 <body>
 
+    {{-- @include('layouts.navigation') --}}
     @include('components.navbar')
 
     @yield('component')

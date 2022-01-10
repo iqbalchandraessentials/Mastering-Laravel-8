@@ -1,12 +1,10 @@
 @extends('layouts.master')
 
 @section('title-page')
-    Dashboar page Laracamp
+    Dashboard Laracamp
 @endsection
 
 @section('component')
-    
-
 <section class="dashboard my-5">
     <div class="container">
         <div class="row text-left">
@@ -99,5 +97,4 @@
         </div>
     </div>
 </section>
-
 @endsection
