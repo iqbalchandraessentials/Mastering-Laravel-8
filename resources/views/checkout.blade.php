@@ -24,8 +24,8 @@
                     <div class="col-lg-5 col-12">
                         <div class="item-bootcamp">
                             <img src="/assets/images/item_bootcamp.png" alt="" class="cover">
-                            <h1 class="package">
-                                GILA BELAJAR
+                            <h1 class="package text-uppercase">
+                                {{ $camps->title }}
                             </h1>
                             <p class="description">
                                 Bootcamp ini akan mengajak Anda untuk belajar penuh mulai dari pengenalan dasar sampai membangun sebuah projek asli
@@ -34,32 +34,51 @@
                     </div>
                     <div class="col-lg-1 col-12"></div>
                     <div class="col-lg-6 col-12">
-                        <form action="#" class="basic-form">
+                        <form action="{{route('checkout.store', $camps->id )}}" class="basic-form" method="POST">
+                            @csrf
                             <div class="mb-4">
-                                <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label class="form-label">Full Name</label>
+                                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" value="{{ old('name') ?: Auth::user()->name }}">
+                                @if ($errors->has('name'))
+                                    <p class="text-danger small">{{ $errors->first('name')}}</p>                                    
+                                @endif
                             </div>
                             <div class="mb-4">
-                                <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label class="form-label">Email Address</label>
+                                <input name="email" type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}"  value="{{  old('email') ?: Auth::user()->email }}">
+                                @if ($errors->has('email'))
+                                    <p class="text-danger small">{{ $errors->first('email')}}</p>                                    
+                                @endif
                             </div>
                             <div class="mb-4">
-                                <label for="exampleInputEmail1" class="form-label">Occupation</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label class="form-label">Occupation</label>
+                                <input name="ocupation" type="text" class="form-control {{ $errors->has('ocupation') ? 'is-invalid' : ''}}" value="{{ old('ocupation') ?:  Auth::user()->ocupation }}">
+                                @if ($errors->has('ocupation'))
+                                    <p class="text-danger small">{{ $errors->first('ocupation')}}</p>                                    
+                                @endif
                             </div>
                             <div class="mb-4">
-                                <label for="exampleInputEmail1" class="form-label">Card Number</label>
-                                <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <label class="form-label">Card Number</label>
+                                <input name="card_number" type="number" class="form-control {{ $errors->has('card_number') ? 'is-invalid' : ''}}" value="{{ old('card_number') }}">
+                                @if ($errors->has('card_number'))
+                                    <p class="text-danger small">{{ $errors->first('card_number')}}</p>                                    
+                                @endif
                             </div>
                             <div class="mb-5">
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
-                                        <label for="exampleInputEmail1" class="form-label">Expired</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <label class="form-label">Expired</label>
+                                        <input name="expired" type="month" class="form-control {{ $errors->has('expired') ? 'is-invalid' : ''}}" value="{{  old('expired') }}">
+                                        @if ($errors->has('expired'))
+                                    <p class="text-danger small">{{ $errors->first('expired')}}</p>                                    
+                                @endif
                                     </div>
                                     <div class="col-lg-6 col-12">
-                                        <label for="exampleInputEmail1" class="form-label">CVC</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                        <label class="form-label">CVC</label>
+                                        <input name="cvc" type="number" maxlength="3" class="form-control {{ $errors->has('cvc') ? 'is-invalid' : ''}}" value="{{ old('cvc') }}">
+                                        @if ($errors->has('cvc'))
+                                    <p class="text-danger small">{{ $errors->first('cvc')}}</p>                                    
+                                @endif
                                     </div>
                                 </div>
                             </div>
