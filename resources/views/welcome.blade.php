@@ -7,6 +7,38 @@
 
 @section('component')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<pre id='data'></pre>
+<script>
+    // data format [{"target": "snmp.ssbSubstation.realEnergy.1", "datapoints": [[4511552439.0, 1417540920]]}]
+
+// http://www.mocky.io/v2/547df7d558eb49190856a759
+
+(function ($) {
+    var url = 'https://stackoverflow.com/'; // mocky.io demo source
+
+    var jsonCallback = function (data) {
+        var gauge = data[0].datapoints[0][0];
+        console.log(gauge);
+        
+        $('#data').html(JSON.stringify(data, null, 2));
+        $("</p>").text('value for gauge ' + gauge).appendTo('#data');
+    };
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: "application/json",
+        dataType: 'jsonp'
+    }).done(jsonCallback)
+    .fail(function (xhr) {
+        alert("error" + xhr.responseText);
+    });
+
+})(jQuery);
+</script>
+
+
 <section class="banner">
 <div class="container">
     <div class="row justify-content-center">

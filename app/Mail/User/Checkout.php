@@ -31,7 +31,7 @@ class Checkout extends Mailable
      */
     public function build()
     {
-        return $this->subject('Horey !, {$this->checkout->Camp->title}')->markdown('emails.user.checkout',[
+        return $this->subject('Horey !, One Last step ')->markdown('emails.user.checkout',[
             "checkout" => $this->checkout
         ]);
     }

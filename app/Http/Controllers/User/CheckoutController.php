@@ -32,7 +32,7 @@ class CheckoutController extends Controller
     {
         if ($camp->isRegistered) {
             $request->session()->flash('error', "You already registred on {$camp->title} camp");
-            return redirect(route('dashboard'));
+            return redirect(route('user.dashboard'));
         }
         return view('checkout',[ "camps"=>$camp ]);
     }
@@ -43,7 +43,7 @@ class CheckoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Store $request, Camp $camp)
+    public function store(Request $request, Camp $camp)
     {
          $data= $request->all();
          $data['user_id'] = Auth::id();
@@ -54,9 +54,9 @@ class CheckoutController extends Controller
         $user->email = $data['email'];
         $user->ocupation = $data['ocupation'];
         $user->save();
-        dd($data);
+        // dd($data);
         $checkout = Checkout::create($data);        
-        // Mail::to(Auth::user()->email)->send(new UserCheckout($checkout));
+        Mail::to(Auth::user()->email)->send(new UserCheckout($checkout));
 
         return redirect(route('checkout.success'));
 

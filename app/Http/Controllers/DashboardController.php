@@ -11,8 +11,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $datas = Checkout::with(['camp'])->whereUserId(Auth::id())->get();
-
-        return view('Auth.user.dashboard',[ 'data' => $datas ]);
+      switch (Auth::user()->is_admin) {
+          case true:
+              return redirect(route('admin.dashboard'));
+              break;
+          
+          default:
+            return redirect(route('user.dashboard'));
+            break;
+      }
     }
 }

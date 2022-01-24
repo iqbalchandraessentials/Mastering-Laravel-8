@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\user\DashboardController as UserDashboardController;
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +39,16 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/checkout/store/{camp}', [ CheckoutController::class, 'store' ])->name('checkout.store');
     
     Route::get('/checkout/invoice/{id}', [ CheckoutController::class, 'invoice' ])->name('checkout.invoice');
+
     Route::get('/dashboard', [ DashboardController::class, 'index' ])->name('dashboard');
+
+    Route::prefix('admin/dashboard')->namespace('Admin')->name('admin.')->group(function(){
+        Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('user/dashboard')->namespace('User')->name('user.')->group(function(){
+        Route::get('/', [UserDashboardController::class, 'index'])->name('dashboard');
+    });
 
 });
 
